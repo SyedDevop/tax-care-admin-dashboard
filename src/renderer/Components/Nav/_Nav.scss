@@ -1,0 +1,36 @@
+#nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50px;
+  background-color: $black-dark;
+  height: 100vh;
+  padding-top: 25px;
+  .nav--dp {
+    max-width: 40px;
+  }
+  .nav--link {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    .nav--link-wrap {
+      display: grid;
+      place-items: center;
+      gap: 4.6rem;
+      a {
+        color: $black-light;
+        transition: all 200ms ease-in;
+        &:hover,
+        &:focus,
+        &:active {
+          color: $primary;
+          transition: all 200ms ease-in;
+        }
+        &:focus,
+        &:active {
+          @include outline-styled($primary);
+        }
+      }
+    }
+  }
+}

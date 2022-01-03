@@ -1,0 +1,58 @@
+// Element Style
+@mixin title-style {
+  color: $black-dark;
+  font-size: clamp(1.5rem, 2.5vw, 2.8rem);
+  font-weight: $font-weight-regular;
+  margin-block-end: 25px;
+  span {
+    color: $primary;
+  }
+}
+// Button styles
+@mixin notification-button-style {
+  button {
+    background-color: $primary;
+    color: $secondary;
+    padding: 10px 30px;
+    font-size: 1rem;
+    border-radius: 10px;
+    margin-left: auto;
+    transition: all 0.3s ease-in;
+    &:hover,
+    &:focus,
+    &:active {
+      cursor: pointer;
+      background-color: $light;
+      box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+    }
+    &:focus,
+    &:active {
+      margin-top: 10px;
+      @include outline-styled($primary);
+    }
+  }
+}
+
+// Hero Styles
+@mixin banners-style {
+  width: 100%;
+  min-height: calc(100vh - 200px);
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+//Flex center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// outline Style
+@mixin outline-styled($outline-color) {
+  outline: $outline-color ridge 2px;
+  outline-offset: 5px;
+}

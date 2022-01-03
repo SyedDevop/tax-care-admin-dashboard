@@ -1,0 +1,46 @@
+#notification {
+  position: relative;
+  margin-left: auto;
+  &::before {
+    content: '';
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background-color: $gray-400;
+    position: absolute;
+  }
+  .notification__section {
+    width: 350px;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+    display: grid;
+    place-items: center;
+    gap: 1em;
+    padding: 25px 20px;
+    .notification__card {
+      display: grid;
+      gap: 0.25em;
+      border: 1px solid $gray-400;
+      border-radius: 20px;
+      padding: 25px;
+      h1,
+      h3 {
+        font-weight: $font-weight-regular;
+        color: $black-light;
+      }
+      h3 {
+        font-size: 0.9rem;
+      }
+      h1 {
+        color: $secondary;
+      }
+      @include notification-button-style();
+    }
+  }
+}

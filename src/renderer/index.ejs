@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Google fonts -->
+  <title>Tax Care Accounting solution</title>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+<script>
+  window.electron.ipcRenderer.once('ipc-example', (arg) => {
+    // eslint-disable-next-line no-console
+    console.log(arg);
+  });
+
+  window.electron.ipcRenderer.myPing();
+
+</script>
+
+</html>
