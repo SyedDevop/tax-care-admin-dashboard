@@ -1,4 +1,4 @@
-const NotificationCard = () => {
+export const NotificationCard = () => {
   return (
     <div className="notification__card">
       <h1>New query</h1>
@@ -13,4 +13,4 @@ const NotificationCard = () => {
   );
 };
 
-export default NotificationCard;
+// export default NotificationCard;
