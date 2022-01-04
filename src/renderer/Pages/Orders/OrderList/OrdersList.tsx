@@ -1,62 +1,51 @@
-const Row = ({
-  rowData,
-  rowTypeHeader,
-}: {
-  rowData: string[];
-  rowTypeHeader?: boolean;
-}) => {
-  return (
-    <tr>
-      {/* eslint-disable-next-line react/destructuring-assignment */}
-      {rowData.map((data) => {
-        return <>{rowTypeHeader ? <th>{data}</th> : <td>{data}</td>}</>;
-      })}
-    </tr>
-  );
-};
-Row.defaultProps = {
-  rowTypeHeader: false,
-};
-
-const OrdersListHeader = ({ headerRowData }: { headerRowData: string[] }) => {
-  return (
-    <thead>
-      <Row rowData={headerRowData} rowTypeHeader />
-    </thead>
-  );
-};
-const OrderListRows = ({ bodyRowData }: { bodyRowData: string[] }) => {
-  return (
-    <tbody>
-      <Row rowData={bodyRowData} />
-    </tbody>
-  );
-};
+import { Table } from '../../../Components/Table';
 
 const OrdersList = () => {
   return (
-    <table id="orders__table">
-      <OrdersListHeader
-        headerRowData={[
-          'created',
-          'customer',
-          'product',
-          'state',
-          'payment',
-          'price',
-        ]}
-      />
-      <OrderListRows
-        bodyRowData={[
+    <Table
+      headerRowData={[
+        'created',
+        'customer',
+        'product',
+        'state',
+        'payment',
+        'price',
+      ]}
+      bodyRowData={[
+        [
           '12 jun 2021',
           'syed uzair ahmed',
           'ITR pack-2',
           'active',
+          'pending',
+          '7000 rs',
+        ],
+        [
+          '12 jun 2021',
+          'syed uzair ahmed',
+          'ITR pack-2',
+          'pending',
           'paid',
           '7000 rs',
-        ]}
-      />
-    </table>
+        ],
+        [
+          '12 jun 2021',
+          'syed uzair ahmed',
+          'ITR pack-2',
+          'active',
+          'refunded',
+          '7000 rs',
+        ],
+        [
+          '12 jun 2021',
+          'syed uzair ahmed',
+          'ITR pack-2',
+          'closed',
+          'paid',
+          '7000 rs',
+        ],
+      ]}
+    />
   );
 };
 

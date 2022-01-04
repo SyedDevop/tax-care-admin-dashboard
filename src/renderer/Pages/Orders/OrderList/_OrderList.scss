@@ -8,8 +8,14 @@
   th,
   thead,
   tr {
-    border: 1px solid $black-gray;
+    border-bottom: 1px solid $black-light;
     padding: 15px 8px;
     text-align: left;
+  }
+  thead {
+    background-color: $black-gray;
+  }
+  .ode {
+    background-color: $gray-500;
   }
 }

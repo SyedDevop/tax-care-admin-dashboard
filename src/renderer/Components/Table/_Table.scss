@@ -1,0 +1,63 @@
+#table__default-style {
+  width: 100%;
+  border-collapse: collapse;
+  &,
+  tbody,
+  td,
+  tfoot,
+  th,
+  thead,
+  tr {
+    border-bottom: 1px solid $black-light;
+    padding: 15px 8px;
+    text-align: left;
+  }
+  thead {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: $secondary;
+  }
+  tbody {
+    color: $black-dark;
+    td {
+      position: relative;
+    }
+    tr {
+      &:nth-child(2n + 2) {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+    tr > :nth-child(4),
+    tr > :nth-child(5) {
+      padding-left: 18px;
+      &::before {
+        content: '';
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.205);
+        top: 50%;
+        transform: translateY(-50%);
+        left: 5px;
+      }
+    }
+  }
+  .ode {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  .complete {
+    &::before {
+      background-color: $green !important;
+    }
+  }
+  .pending {
+    &::before {
+      background-color: yellow !important;
+    }
+  }
+  .closed {
+    &::before {
+      background-color: $red !important;
+    }
+  }
+}

@@ -4,13 +4,13 @@ import { FC } from 'react';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import PeopleIcon from '@mui/icons-material/People';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import heroIcon from '../../../../assets/resource/Heroicon.svg';
-import { useAuth, useFirebaseFunction } from '../../Hooks';
+import { useAuth } from '../../Hooks';
 
 const Nav: FC = () => {
-  const { signOutUser, user } = useAuth();
+  const { signOutUser } = useAuth();
   // const { isDiscount } = useFirebaseFunction();
   return (
     <nav id="nav">
@@ -24,15 +24,15 @@ const Nav: FC = () => {
       />
       <div className="nav--link">
         <div className="nav--link-wrap">
-          <Link to="/clients" title="Clients">
+          <NavLink activeClassName="active" to="/clients" title="Clients">
             <PeopleIcon />
-          </Link>
-          <Link to="/query" title="Query">
+          </NavLink>
+          <NavLink activeClassName="active" to="/query" title="Query">
             <ImportContactsIcon />
-          </Link>
-          <Link to="/orders/order" title="Orders">
+          </NavLink>
+          <NavLink activeClassName="active" to="/orders/order" title="Orders">
             <ShoppingBasketIcon />
-          </Link>
+          </NavLink>
         </div>
         {/* <button
           type="button"

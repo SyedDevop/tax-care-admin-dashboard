@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50px;
+  min-width: 50px;
   background-color: $black-dark;
   height: 100vh;
   padding-top: 25px;
@@ -26,10 +26,12 @@
           color: $primary;
           transition: all 200ms ease-in;
         }
-        &:focus,
-        &:active {
+        &:focus {
           @include outline-styled($primary);
         }
+      }
+      .active {
+        color: $primary;
       }
     }
   }
