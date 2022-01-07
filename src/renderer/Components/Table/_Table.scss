@@ -1,6 +1,8 @@
 #table__default-style {
+  background-color: $light;
   width: 100%;
   border-collapse: collapse;
+  box-shadow: 5px 5px 10px $clr-gray300;
   &,
   tbody,
   td,
@@ -8,56 +10,65 @@
   th,
   thead,
   tr {
-    border-bottom: 1px solid $black-light;
     padding: 15px 8px;
     text-align: left;
   }
   thead {
-    background-color: rgba(0, 0, 0, 0.1);
     color: $secondary;
+    box-shadow: 5px 5px 10px $clr-gray300;
   }
   tbody {
+    margin-top: 15px;
     color: $black-dark;
     td {
       position: relative;
     }
     tr {
-      &:nth-child(2n + 2) {
-        background-color: rgba(0, 0, 0, 0.05);
+      position: relative;
+      border-bottom: 1px solid $gray-700;
+      transition: all 200ms ease-in;
+      .table__row--title {
+        position: absolute;
+        top: 100%;
+      }
+      & td:last-child {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+      &:hover {
+        background-color: $clr-gray150;
       }
     }
-    tr > :nth-child(4),
-    tr > :nth-child(5) {
-      padding-left: 18px;
-      &::before {
-        content: '';
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: rgba(0, 0, 0, 0.205);
-        top: 50%;
-        transform: translateY(-50%);
-        left: 5px;
-      }
+    .table__row--title {
+      padding: 5px 10px;
+      border-radius: 1px;
     }
   }
-  .ode {
-    background-color: rgba(0, 0, 0, 0.05);
+  @mixin spanStyle {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: 300;
   }
   .complete {
-    &::before {
-      background-color: $green !important;
+    span {
+      @include spanStyle();
+      color: $green;
+      background-color: $green-light;
     }
   }
   .pending {
-    &::before {
-      background-color: yellow !important;
+    span {
+      @include spanStyle();
+      background-color: #fff0c2;
+      color: #a68b00;
     }
   }
   .closed {
-    &::before {
-      background-color: $red !important;
+    span {
+      @include spanStyle();
+      background-color: $red-light;
+      color: $red;
     }
   }
 }

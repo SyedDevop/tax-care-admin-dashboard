@@ -5,7 +5,7 @@ export enum PaymentState {
 }
 
 export enum OrderState {
-  active = 'complete',
-  pending = 'pending',
-  closed = 'closed',
+  complete = 'complete',
+  conformation = 'pending',
+  cancelled = 'closed',
 }

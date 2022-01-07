@@ -1,57 +1,12 @@
 /* eslint-disable react/no-array-index-key */
-import { OrderState, PaymentState } from '../../Enum';
+import React from 'react';
+import { Row } from './Row';
 
-export interface RowProps {
-  rowData: string[];
-  rowTypeHeader?: boolean;
-  className?: string;
-}
-
-const OrderStates: Record<string, OrderState> = {
-  active: OrderState.active,
-  pending: OrderState.pending,
-  closed: OrderState.closed,
-};
-
-const PaymentStates: Record<string, PaymentState> = {
-  paid: PaymentState.paid,
-  pending: PaymentState.pending,
-  refunded: PaymentState.refunded,
-};
-
-export const Row = ({ rowData, rowTypeHeader, className }: RowProps) => {
-  return (
-    <tr className={className}>
-      {/* eslint-disable-next-line react/destructuring-assignment */}
-      {rowData.map((data: string, key) => {
-        return (
-          <>
-            {rowTypeHeader ? (
-              <th key={key}>{data}</th>
-            ) : (
-              <td
-                key={key}
-                className={`${OrderStates[data] || PaymentStates[data] || ''}`}
-              >
-                {data}
-              </td>
-            )}
-          </>
-        );
-      })}
-    </tr>
-  );
-};
-Row.defaultProps = {
-  rowTypeHeader: false,
-  className: '',
-};
-
-export interface OrdersListHeaderProps {
+export interface TableHeaderProps {
   headerRowData: string[];
 }
 
-export const OrdersListHeader = ({ headerRowData }: OrdersListHeaderProps) => {
+export const TableHeader = ({ headerRowData }: TableHeaderProps) => {
   return (
     <thead>
       <Row rowData={headerRowData} rowTypeHeader />
@@ -66,7 +21,11 @@ export const OrderListRows = ({ bodyRowData }: OrderListRowsProps) => {
   return (
     <tbody>
       {bodyRowData.map((data, key) => {
-        return <Row key={key} rowData={data} />;
+        return (
+          <>
+            <Row key={key} rowData={data} />
+          </>
+        );
       })}
     </tbody>
   );
@@ -74,14 +33,8 @@ export const OrderListRows = ({ bodyRowData }: OrderListRowsProps) => {
 
 export interface TableProps {
   classNameForRow?: string;
-  bodyRowData: OrderListRowsProps['bodyRowData'];
-  headerRowData: OrdersListHeaderProps['headerRowData'];
+  children: React.ReactNode;
 }
-export const Table = ({ bodyRowData, headerRowData }: TableProps) => {
-  return (
-    <table id="table__default-style">
-      <OrdersListHeader headerRowData={headerRowData} />
-      <OrderListRows bodyRowData={bodyRowData} />
-    </table>
-  );
+export const Table = ({ children }: TableProps) => {
+  return <table id="table__default-style">{children}</table>;
 };

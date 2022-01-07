@@ -9,7 +9,9 @@ $gray-300: #828282;
 $light: #ffffff;
 $primary: #44eaff;
 $secondary: #091f2c;
-$green: #00ffaa;
+$green-light: #e5fcf1;
+$green: #388e3c;
+$red-light: rgba(255, 0, 89, 0.1);
 $red: #ff0059;
 // ----------------------------------------------------------------
 // Font
@@ -29,3 +31,12 @@ $tablet: 770px;
 $mobile: 576px;
 // Clamp
 $clampPadding-20-50: clamp(20px, 6vw, 45px);
+// Gray shads
+$clr-gray100: #f9fbff;
+$clr-gray150: #f4f6fb;
+$clr-gray200: #eef1f6;
+$clr-gray300: #e1e5ee;
+$clr-gray400: #767b91;
+$clr-gray500: #4f546c;
+$clr-gray600: #2a324b;
+$clr-gray700: #161d34;
