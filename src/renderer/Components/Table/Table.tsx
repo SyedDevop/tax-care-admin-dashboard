@@ -1,5 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
+import { useTable } from 'react-table';
+
 import { Row } from './Row';
 
 export interface TableHeaderProps {
