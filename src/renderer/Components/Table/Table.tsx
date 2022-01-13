@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { useTable } from 'react-table';
+// import { useTable } from 'react-table';
 
 import { Row } from './Row';
 
@@ -38,5 +38,9 @@ export interface TableProps {
   children: React.ReactNode;
 }
 export const Table = ({ children }: TableProps) => {
-  return <table id="table__default-style">{children}</table>;
+  return (
+    <main id="table__section">
+      <table id="table__default-style">{children}</table>
+    </main>
+  );
 };

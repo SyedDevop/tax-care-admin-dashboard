@@ -17,6 +17,7 @@ body {
   display: flex;
   overflow: hidden;
   background-color: $gray-700;
+  max-height: 100vh;
 }
 
 .container {

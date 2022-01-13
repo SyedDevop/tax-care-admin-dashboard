@@ -5,12 +5,10 @@ import Stage from './Stage/Stage';
 const Orders = () => {
   return (
     <section id="orders">
-      <div className="orders__header">
-        <header>
-          <h1>Orders &#x21F5;</h1>
-        </header>
-        <OrdersList />
-      </div>
+      <header>
+        <h1>Orders &#x21F5;</h1>
+      </header>
+      <OrdersList />
     </section>
   );
 };

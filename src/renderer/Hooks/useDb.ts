@@ -9,7 +9,7 @@ import {
   orderBy,
 } from 'firebase/firestore';
 
-import { ExistingUserOrder, NewUserOrder } from '../Type';
+import { ExistingUserOrder, NewUserOrder } from '../Types';
 
 const useDb = () => {
   const db = getFirestore();

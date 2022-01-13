@@ -5,6 +5,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import { OrderState, PaymentState } from '../../Enum';
+import { DropDownRow } from './Row/DropDownRow';
 
 export const OrderStates: Record<string, OrderState> = {
   complete: OrderState.complete,
@@ -21,7 +22,7 @@ export interface RowProps {
   rowData: string[];
   rowTypeHeader?: boolean;
   className?: string;
-  children?: React.ReactNode;
+  // children?: React.ReactNode;
 }
 export const HeaderRow = ({ list }: { list: string[] }) => {
   return (
@@ -39,40 +40,14 @@ export const HeaderRow = ({ list }: { list: string[] }) => {
   );
 };
 
-const DropDownRow = ({ state }: { state: boolean }) => {
-  return (
-    <td
-      id="drop-down__row"
-      className={(state && 'drop-down__row--shown') || ''}
-      colSpan={7}
-      role="cell"
-    >
-      <div style={{ display: 'flex' }}>
-        <h3>hi</h3>
-        <h3>jku</h3>
-        <h3>hhujf</h3>
-        <hr />
-        <h3>l;;lkll</h3>
-        <h3>nkjhlkjhlkj</h3>
-        <h3>jkhkljhlkj</h3>
-        <hr />
-        <h3>jkhljkhljk</h3>
-        <h3>jkjklhj</h3>
-        <h3>jkhkljhlkj</h3>
-        <hr />
-      </div>
-    </td>
-  );
-};
-
 export const BodyRow = ({
   list,
-  setdropDown,
-  state,
+  setDropDown,
+  clickState,
 }: {
   list: string[];
-  setdropDown: React.Dispatch<React.SetStateAction<boolean>>;
-  state: boolean;
+  setDropDown: React.Dispatch<React.SetStateAction<boolean>>;
+  clickState: boolean;
 }) => {
   return (
     <>
@@ -91,39 +66,40 @@ export const BodyRow = ({
           type="button"
           className="btn-drop-down"
           onClick={() => {
-            console.log('click');
-            setdropDown((pre) => !pre);
+            setDropDown((pre) => !pre);
           }}
         >
-          <ExpandMoreIcon />
+          <ExpandMoreIcon
+            className={
+              clickState ? 'btn-arrow btn-arrow--clicked' : 'btn-arrow'
+            }
+          />
         </button>
       </td>
     </>
   );
 };
 
-export const Row = ({
-  rowData,
-  rowTypeHeader,
-  className,
-  children,
-}: RowProps) => {
-  const [dropDown, setdropDown] = React.useState(false);
+export const Row = ({ rowData, rowTypeHeader, className }: RowProps) => {
+  const [dropDown, setDropDown] = React.useState(false);
   return (
     <>
-      <tr role="row" className={className}>
-        {children}
-        {rowTypeHeader ? (
-          <>
-            <HeaderRow list={rowData} />
-          </>
-        ) : (
-          <BodyRow list={rowData} setdropDown={setdropDown} state={dropDown} />
-        )}
-      </tr>
-      <tr>
-        <DropDownRow state={dropDown} />
-      </tr>
+      {rowTypeHeader ? (
+        <tr role="row" className={className}>
+          <HeaderRow list={rowData} />
+        </tr>
+      ) : (
+        <>
+          <tr role="row">
+            <BodyRow
+              list={rowData}
+              setDropDown={setDropDown}
+              clickState={dropDown}
+            />
+          </tr>
+          <DropDownRow activeState={dropDown} />
+        </>
+      )}
     </>
   );
 };
