@@ -36,24 +36,6 @@ const CheckInputRowItem = ({ title, handelCheck }: CheckInputRowItemProps) => {
   );
 };
 
-const sampleData = [
-  {
-    rowDatas: [
-      { title: 'client', text: 'new' },
-      { title: 'phone no', text: '8050318651' },
-      { title: 'email', text: 'syeduzairahmed70@gmail.com' },
-    ],
-  },
-  {
-    rowDatas: [
-      { title: 'pack', text: 'TCI' },
-      { title: 'addon', text: 'hello/name' },
-      { title: 'discount', text: '00.00 rs' },
-      { title: 'amount', text: '7000 rs' },
-    ],
-  },
-];
-
 const MapRowData = (data: DropDownRowData[]) => {
   return (
     <>
@@ -74,7 +56,10 @@ const MapRowData = (data: DropDownRowData[]) => {
 };
 
 // eslint-disable-next-line import/prefer-default-export
-export const DropDownRow = ({ activeState, RowItemData }: DropDownRowProps) => {
+export const DropDownRow = ({
+  activeState,
+  DropDownRowDatas,
+}: DropDownRowProps) => {
   const [isAnyCheckChecked, setIsAnyCheckChecked] = useState(true);
   const [checkState, setCheckState] = useState({
     state: false,
@@ -105,7 +90,7 @@ export const DropDownRow = ({ activeState, RowItemData }: DropDownRowProps) => {
         role="cell"
       >
         <div className="drop-down__content">
-          {MapRowData(sampleData)}
+          {MapRowData(DropDownRowDatas)}
           <div className="drop-down__content--card">
             <CheckInputRowItem
               {...{ title: 'states', handelCheck: handelStateCheck }}

@@ -1,3 +1,3 @@
 export * from './Checkout.types';
-export * from './existingUserOrder';
+export * from './UserOrder.types';
 export * from '../Components/Table/Row/Row.types';

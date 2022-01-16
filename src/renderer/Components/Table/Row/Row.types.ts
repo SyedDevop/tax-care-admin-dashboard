@@ -15,5 +15,14 @@ export interface DropDownRowData {
 
 export interface DropDownRowProps {
   activeState: boolean;
-  RowItemData?: TextRowItemProps;
+  DropDownRowDatas: DropDownRowData[];
+}
+export interface RowProps {
+  rowData: string[];
+  // children?: React.ReactNode;
+  dropDownData: DropDownRowData[];
+}
+export interface TableListRowsProps {
+  bodyRowData: string[][];
+  bodySubRows: DropDownRowData[];
 }

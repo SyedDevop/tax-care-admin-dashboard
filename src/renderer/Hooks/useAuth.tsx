@@ -10,7 +10,6 @@ import {
   sendPasswordResetEmail,
   User,
   updatePassword,
-  CustomParameters,
 } from 'firebase/auth';
 import firebaseConfig from '../../../firebase-config.json';
 
@@ -100,16 +99,16 @@ export const AuthProvider: FC = ({ children }) => {
   // }
   // eslint-disable-next-line consistent-return
   const emailVerification = () => {
-    if (!user) {
-      return { message: 'User have not logged in.', value: false };
+    if (user) {
+      sendEmailVerification(user)
+        .then(() => {
+          return { message: 'User has been verified.', value: false };
+        })
+        .catch((error) => {
+          return { message: error, value: false };
+        });
     }
-    sendEmailVerification(user)
-      .then(() => {
-        return { message: 'User has been verified.', value: false };
-      })
-      .catch((error) => {
-        return { message: error, value: false };
-      });
+    return { message: 'User have not logged in.', value: false };
   };
 
   // Subscribe to user on mount

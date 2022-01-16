@@ -49,7 +49,18 @@ const useDb = () => {
     return exists;
   };
 
-  return { orderById, addExistingUserOrder, addNewUserOrder, orderExist };
+  const getALlDoc = async (collationName: string) => {
+    const queryRef = query(collection(db, collationName));
+    return getDocs(queryRef);
+  };
+
+  return {
+    orderById,
+    addExistingUserOrder,
+    addNewUserOrder,
+    orderExist,
+    getALlDoc,
+  };
 };
 
 export default useDb;

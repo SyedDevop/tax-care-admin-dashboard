@@ -4,6 +4,7 @@ import React from 'react';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { RowProps } from '../../Types';
 import { OrderState, PaymentState } from '../../Enum';
 import { DropDownRow } from './Row/DropDownRow';
 
@@ -18,12 +19,6 @@ export const PaymentStates: Record<string, PaymentState> = {
   pending: PaymentState.pending,
   refunded: PaymentState.refunded,
 };
-export interface RowProps {
-  rowData: string[];
-  rowTypeHeader?: boolean;
-  className?: string;
-  // children?: React.ReactNode;
-}
 export const HeaderRow = ({ list }: { list: string[] }) => {
   return (
     <>
@@ -79,27 +74,18 @@ export const BodyRow = ({
     </>
   );
 };
-
-export const Row = ({ rowData, rowTypeHeader, className }: RowProps) => {
+export const Row = ({ rowData, dropDownData }: RowProps) => {
   const [dropDown, setDropDown] = React.useState(false);
   return (
     <>
-      {rowTypeHeader ? (
-        <tr role="row" className={className}>
-          <HeaderRow list={rowData} />
-        </tr>
-      ) : (
-        <>
-          <tr role="row">
-            <BodyRow
-              list={rowData}
-              setDropDown={setDropDown}
-              clickState={dropDown}
-            />
-          </tr>
-          <DropDownRow activeState={dropDown} />
-        </>
-      )}
+      <tr role="row">
+        <BodyRow
+          list={rowData}
+          setDropDown={setDropDown}
+          clickState={dropDown}
+        />
+      </tr>
+      <DropDownRow activeState={dropDown} DropDownRowDatas={dropDownData} />
     </>
   );
 };

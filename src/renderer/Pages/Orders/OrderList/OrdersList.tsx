@@ -1,6 +1,10 @@
-import { Table, OrderListRows, TableHeader } from '../../../Components/Table';
+import { Table, TableListRows, TableHeader } from '../../../Components/Table';
+// import { useOrder } from '../../../Context';
 
 const OrdersList = () => {
+  // const { orderData } = useOrder();
+  // console.log(orderData);
+
   return (
     <Table>
       <TableHeader
@@ -13,7 +17,7 @@ const OrdersList = () => {
           'amount',
         ]}
       />
-      <OrderListRows
+      <TableListRows
         bodyRowData={[
           [
             '12 jun 2021',
@@ -30,7 +34,6 @@ const OrdersList = () => {
             'conformation',
             'pending',
             '7000 rs',
-            '',
           ],
           [
             '12 jun 2021',
@@ -48,6 +51,23 @@ const OrdersList = () => {
             'pending',
             '7000 rs',
           ],
+        ]}
+        bodySubRows={[
+          {
+            rowDatas: [
+              { title: 'client', text: 'new' },
+              { title: 'phone no', text: '8050318651' },
+              { title: 'email', text: 'syeduzairahmed70@gmail.com' },
+            ],
+          },
+          {
+            rowDatas: [
+              { title: 'pack', text: 'TCI' },
+              { title: 'addon', text: 'hello/name' },
+              { title: 'discount', text: '00.00 rs' },
+              { title: 'amount', text: '7000 rs' },
+            ],
+          },
         ]}
       />
     </Table>

@@ -2,6 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 import { OrderSummary } from './Checkout.types';
 
 export interface ExistingUserOrder {
+  id: string;
   orderId: string;
   userId: string;
   orderDetails: OrderSummary;
@@ -21,6 +22,7 @@ export interface FormInput {
 }
 
 export interface NewUserOrder {
+  id: string;
   orderId: string;
   clientData: FormInput;
   orderDetails: OrderSummary;
@@ -31,3 +33,5 @@ export interface NewUserOrder {
   };
   issuedDate?: Timestamp;
 }
+
+export type UserOrderData = ExistingUserOrder | NewUserOrder;

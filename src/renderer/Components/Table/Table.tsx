@@ -2,7 +2,8 @@
 import React from 'react';
 // import { useTable } from 'react-table';
 
-import { Row } from './Row';
+import { TableListRowsProps } from '../../Types';
+import { Row, HeaderRow } from './Row';
 
 export interface TableHeaderProps {
   headerRowData: string[];
@@ -11,21 +12,23 @@ export interface TableHeaderProps {
 export const TableHeader = ({ headerRowData }: TableHeaderProps) => {
   return (
     <thead>
-      <Row rowData={headerRowData} rowTypeHeader />
+      <tr role="row">
+        <HeaderRow list={headerRowData} />
+      </tr>
     </thead>
   );
 };
 
-export interface OrderListRowsProps {
-  bodyRowData: string[][];
-}
-export const OrderListRows = ({ bodyRowData }: OrderListRowsProps) => {
+export const TableListRows = ({
+  bodyRowData,
+  bodySubRows,
+}: TableListRowsProps) => {
   return (
     <tbody>
       {bodyRowData.map((data, key) => {
         return (
           <>
-            <Row key={key} rowData={data} />
+            <Row key={key} rowData={data} dropDownData={bodySubRows} />
           </>
         );
       })}
