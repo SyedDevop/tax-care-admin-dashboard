@@ -27,6 +27,3 @@ const Orders = () => {
 };
 
 export default Orders;
-
-// TODO-1: Delete order and stage nav bar and its components
-// TODO-2: Re-design the order section.
