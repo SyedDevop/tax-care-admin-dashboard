@@ -1,34 +1,50 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { ChangeEvent, useEffect, useState } from 'react';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
-import { isAny } from '../../../Utils';
+import { isAny, numberToCurrency } from '../../../Utils';
 import {
   TextRowItemProps,
   CheckInputRowItemProps,
   DropDownRowProps,
-  DropDownRowData,
+  DropDownRowContentProps,
+  OrderTableRowDataType,
 } from '../../../Types';
 
 const TextRowItem = ({ title, text }: TextRowItemProps) => {
   return (
-    <div className="drop-down__content--card--col">
+    <div className="drop-down__content--card--line">
       <h3 className="key">{title}</h3>
       <h3 className="value">{text}</h3>
     </div>
   );
 };
-const CheckInputRowItem = ({ title, handelCheck }: CheckInputRowItemProps) => {
+
+const ClientDetailColumn = ({
+  columnData: { row1 },
+}: {
+  columnData: OrderTableRowDataType['subRow'];
+}) => {
   return (
-    <div className="drop-down__content--card--col">
-      <label htmlFor={`order--${title}`}>{title}</label>
+    <div className="drop-down__content--card">
+      <TextRowItem title="client" text={row1.client} />
+      <TextRowItem title="phone no" text={row1.phone} />
+      <TextRowItem title="email" text={row1.email} />
+    </div>
+  );
+};
+
+const CheckInputRowItem = ({
+  title,
+  handelCheck,
+  inputId,
+}: CheckInputRowItemProps) => {
+  return (
+    <div className="drop-down__content--card--line">
+      <label htmlFor={`order--${inputId}`}>{title}</label>
       <input
         type="checkbox"
-        id={`order--${title}`}
+        id={`order--${inputId}`}
         value={title}
         onChange={handelCheck}
       />
@@ -36,21 +52,42 @@ const CheckInputRowItem = ({ title, handelCheck }: CheckInputRowItemProps) => {
   );
 };
 
-const MapRowData = (data: DropDownRowData[]) => {
+const OrderDetailsColumn = ({
+  columnData: { row2 },
+}: {
+  columnData: OrderTableRowDataType['subRow'];
+}) => {
+  return (
+    <div className="drop-down__content--card">
+      <TextRowItem title="orderId" text={row2.orderId} />
+      {row2.addOns?.length === 0 ? (
+        <>
+          <TextRowItem title="addons" text="no addons" />
+        </>
+      ) : (
+        <>
+          {row2.addOns?.map((rowText, key) => {
+            return key === 0 ? (
+              <TextRowItem title="addons" text={rowText} />
+            ) : (
+              <>
+                <TextRowItem title=" " text={rowText} />
+              </>
+            );
+          })}
+        </>
+      )}
+    </div>
+  );
+};
+
+const DropDownRowContent = ({ rowDatas }: DropDownRowContentProps) => {
   return (
     <>
-      {data.map(({ rowDatas }, key) => {
-        return (
-          <>
-            <div className="drop-down__content--card" key={key}>
-              {rowDatas.map((rowData, rowDataKey) => {
-                return <TextRowItem {...rowData} key={rowDataKey} />;
-              })}
-            </div>
-            <hr />
-          </>
-        );
-      })}
+      <ClientDetailColumn columnData={rowDatas.subRow} />
+      <hr />
+      <OrderDetailsColumn columnData={rowDatas.subRow} />
+      <hr />
     </>
   );
 };
@@ -90,13 +127,29 @@ export const DropDownRow = ({
         role="cell"
       >
         <div className="drop-down__content">
-          {MapRowData(DropDownRowDatas)}
+          <DropDownRowContent rowDatas={DropDownRowDatas} />
           <div className="drop-down__content--card">
-            <CheckInputRowItem
-              {...{ title: 'states', handelCheck: handelStateCheck }}
+            <TextRowItem
+              title="discount"
+              text={numberToCurrency(DropDownRowDatas.discount)}
+            />
+            <TextRowItem
+              title="pack price"
+              text={numberToCurrency(DropDownRowDatas.price)}
             />
             <CheckInputRowItem
-              {...{ title: 'payment', handelCheck: handelStateCheck }}
+              {...{
+                title: `states`,
+                handelCheck: handelStateCheck,
+                inputId: `states-${DropDownRowDatas.id}`,
+              }}
+            />
+            <CheckInputRowItem
+              {...{
+                title: `payment`,
+                handelCheck: handelStateCheck,
+                inputId: `payment-${DropDownRowDatas.id}`,
+              }}
             />
           </div>
         </div>

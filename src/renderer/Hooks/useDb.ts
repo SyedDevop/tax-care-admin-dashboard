@@ -7,13 +7,15 @@ import {
   addDoc,
   serverTimestamp,
   orderBy,
+  connectFirestoreEmulator,
+  onSnapshot,
 } from 'firebase/firestore';
 
-import { ExistingUserOrder, NewUserOrder } from '../Types';
+import { UserOrderData } from '../Types';
 
+const db = getFirestore();
+connectFirestoreEmulator(db, 'localhost', 9999);
 const useDb = () => {
-  const db = getFirestore();
-
   const orderById = async (userId: string) => {
     const queryRef = query(
       collection(db, 'existingUserOrder'),
@@ -23,12 +25,12 @@ const useDb = () => {
     return getDocs(queryRef);
   };
 
-  const addExistingUserOrder = (data: ExistingUserOrder) => {
+  const addExistingUserOrder = (data: UserOrderData) => {
     const uploadDate = { ...data, issuedDate: serverTimestamp() };
     return addDoc(collection(db, 'existingUserOrder'), uploadDate);
   };
 
-  const addNewUserOrder = (data: NewUserOrder) => {
+  const addNewUserOrder = (data: UserOrderData) => {
     const uploadDate = { ...data, issuedDate: serverTimestamp() };
     return addDoc(collection(db, 'newUserOrder'), uploadDate);
   };
@@ -54,12 +56,18 @@ const useDb = () => {
     return getDocs(queryRef);
   };
 
+  const getQueryReference = (collationName: string) => {
+    return query(collection(db, collationName), orderBy('issuedDate', 'desc'));
+  };
+
   return {
     orderById,
     addExistingUserOrder,
     addNewUserOrder,
     orderExist,
     getALlDoc,
+    getQueryReference,
+    onSnapshot,
   };
 };
 

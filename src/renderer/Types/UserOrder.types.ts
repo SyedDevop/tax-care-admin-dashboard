@@ -1,37 +1,22 @@
 import { Timestamp } from 'firebase/firestore';
 import { OrderSummary } from './Checkout.types';
 
-export interface ExistingUserOrder {
-  id: string;
-  orderId: string;
-  userId: string;
-  orderDetails: OrderSummary;
-  discountPrice: number;
-  orderStates: {
-    message: string;
-    color: string;
-  };
-  issuedDate?: Timestamp;
-  tag: string;
-}
-
 export interface FormInput {
   name: string;
   email: string;
   phoneNumber: string;
 }
-
-export interface NewUserOrder {
-  id: string;
-  orderId: string;
+export interface UserOrderData {
   clientData: FormInput;
-  orderDetails: OrderSummary;
+  clientType: string;
   discountPrice: number;
-  orderStates: {
-    message: string;
-    color: string;
-  };
-  issuedDate?: Timestamp;
+  id: string;
+  issuedDate: Timestamp;
+  orderDetails: OrderSummary;
+  orderId: string;
+  orderStates: { payment: string; state: string };
+  tag?: string;
+  totalAddOnAmount: number;
+  totalAmount: number;
+  userId?: string;
 }
-
-export type UserOrderData = ExistingUserOrder | NewUserOrder;

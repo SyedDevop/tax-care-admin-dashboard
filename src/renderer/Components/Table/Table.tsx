@@ -1,34 +1,34 @@
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 // import { useTable } from 'react-table';
 
-import { TableListRowsProps } from '../../Types';
+import { OrderTableRowDataType, TableListRowsProps } from '../../Types';
 import { Row, HeaderRow } from './Row';
 
 export interface TableHeaderProps {
   headerRowData: string[];
+  requestSortConfig: (key: keyof OrderTableRowDataType) => void;
 }
 
-export const TableHeader = ({ headerRowData }: TableHeaderProps) => {
+export const TableHeader = ({
+  headerRowData,
+  requestSortConfig,
+}: TableHeaderProps) => {
   return (
     <thead>
       <tr role="row">
-        <HeaderRow list={headerRowData} />
+        <HeaderRow list={headerRowData} sortConfig={requestSortConfig} />
       </tr>
     </thead>
   );
 };
 
-export const TableListRows = ({
-  bodyRowData,
-  bodySubRows,
-}: TableListRowsProps) => {
+export const TableListRows = ({ bodyRowData }: TableListRowsProps) => {
   return (
     <tbody>
-      {bodyRowData.map((data, key) => {
+      {bodyRowData.map((rowData) => {
         return (
           <>
-            <Row key={key} rowData={data} dropDownData={bodySubRows} />
+            <Row key={rowData.id} rowData={rowData} />
           </>
         );
       })}
