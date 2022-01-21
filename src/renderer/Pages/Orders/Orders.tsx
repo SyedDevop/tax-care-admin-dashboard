@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { OrderTableRowDataType } from './Order';
 import OrdersList from './OrderList/OrdersList';
-import Stage from './Stage/Stage';
 import useOrders from './useOrders';
 
 // FIXME: redesign ui from the scratch.
@@ -27,3 +26,6 @@ const Orders = () => {
 };
 
 export default Orders;
+
+// TODO-1: Delete order and stage nav bar and its components
+// TODO-2: Re-design the order section.
