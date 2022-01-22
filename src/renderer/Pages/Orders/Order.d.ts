@@ -5,18 +5,17 @@ export interface OrderTableRowDataType {
   planId: string;
   states: string;
   paymentState: string;
-  amount: number;
+  amount: string;
   name: string;
-  subRow: SubRow;
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  subRows: {}[];
   addOnTotal: number;
   discount: number;
-  price: number;
+  price: string;
+  moreIcon?: string;
 }
 
-export interface SubRow {
-  row1: Row1;
-  row2: Row2;
-}
+// export interface SubRow {}
 
 export interface Row1 {
   client: string;

@@ -1,26 +1,28 @@
-import { useEffect, useState } from 'react';
-import { OrderTableRowDataType } from './Order';
+import { useMemo, StrictMode } from 'react';
+import { Column, useTable } from 'react-table';
+
+import { Table } from '../../Components/Table';
+
+import { useOrder } from '../../Context';
 import OrdersList from './OrderList/OrdersList';
 import useOrders from './useOrders';
+import ORDERS_COLUMNS from './OrdersColumns';
+import { OrderTableRowDataType } from './Order';
 
 // FIXME: redesign ui from the scratch.
 const Orders = () => {
-  const { orderData } = useOrders();
-  const [ordersList, setOrdersList] = useState<OrderTableRowDataType[]>([]);
-  const LoadData = async () => {
-    const getData = await orderData();
-    setOrdersList(getData);
-  };
-  useEffect(() => {
-    LoadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { orderList } = useOrder();
+  const { orderData } = useOrders(orderList);
+  const columns = useMemo(() => ORDERS_COLUMNS, []);
+  const data = useMemo(() => orderData, []);
   return (
     <section id="orders">
       <header>
         <h1>Orders &#x21F5;</h1>
       </header>
-      <OrdersList orderList={ordersList} />
+      <StrictMode>
+        <Table columns={columns} data={data} />
+      </StrictMode>
     </section>
   );
 };

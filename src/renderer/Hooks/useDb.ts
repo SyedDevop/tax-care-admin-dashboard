@@ -14,7 +14,7 @@ import {
 import { UserOrderData } from '../Types';
 
 const db = getFirestore();
-connectFirestoreEmulator(db, 'localhost', 9999);
+connectFirestoreEmulator(db, 'localhost', 8080);
 const useDb = () => {
   const orderById = async (userId: string) => {
     const queryRef = query(
