@@ -5,7 +5,6 @@ import { Column, useTable, useSortBy, useExpanded } from 'react-table';
 
 export interface TableProps<D extends object> {
   classNameForRow?: string;
-  // data: OrderTableRowDataType[];
   columns: ReadonlyArray<Column<D>>;
   data: readonly D[];
   renderRowSubComponent: ({ row }: any) => JSX.Element;
@@ -36,7 +35,9 @@ export function Table<T extends object = {}>({
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}

@@ -48,22 +48,16 @@
         font-size: 0.9rem;
         color: $clr-gray500;
       }
-      .btn-drop-down {
-        border: 0;
-        background: transparent;
-        .btn-arrow {
-          color: $gray-400;
-          transform: rotate(0deg);
-          transition: all 400ms ease-in;
-        }
-        .btn-arrow--clicked {
-          color: $primary;
-          transform: rotate(-180deg);
-          transition: all 400ms ease-in;
-        }
-        &:hover {
-          cursor: pointer;
-        }
+
+      .expanded-arrow {
+        color: $gray-400;
+        transform: rotate(0deg);
+        transition: all 400ms ease-in;
+      }
+      .expanded-arrow--clicked {
+        color: $primary;
+        transform: rotate(-180deg);
+        transition: all 400ms ease-in;
       }
 
       &:hover {
@@ -75,31 +69,25 @@
       border-radius: 1px;
     }
   }
-  @mixin spanStyle {
+  @mixin identifierBlockStyle {
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: 300;
   }
   .complete {
-    span {
-      @include spanStyle();
-      color: $green;
-      background-color: $green-light;
-    }
+    @include identifierBlockStyle();
+    color: $green;
+    background-color: $green-light;
   }
   .pending {
-    span {
-      @include spanStyle();
-      background-color: #fff0c2;
-      color: #a68b00;
-    }
+    @include identifierBlockStyle();
+    background-color: #fff0c2;
+    color: #a68b00;
   }
   .closed {
-    span {
-      @include spanStyle();
-      background-color: $red-light;
-      color: $red;
-    }
+    @include identifierBlockStyle();
+    background-color: $red-light;
+    color: $red;
   }
 }
 
