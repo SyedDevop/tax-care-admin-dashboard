@@ -56,8 +56,12 @@ export function Table<T extends object = {}>({
                 </tr>
                 {/* Sub Row start here */}
                 {row.isExpanded ? (
-                  <tr>
-                    <td colSpan={visibleColumns.length}>
+                  <tr className="drop-down">
+                    <td
+                      id="drop-down__row"
+                      className="drop-down__row--shown"
+                      colSpan={visibleColumns.length}
+                    >
                       {renderRowSubComponent({ row })}
                     </td>
                   </tr>

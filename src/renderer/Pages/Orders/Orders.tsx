@@ -4,6 +4,8 @@ import { Table } from '../../Components/Table';
 import { useOrder } from '../../Context';
 import useOrders from './useOrders';
 import ORDERS_COLUMNS from './OrdersColumns';
+import { OrderSubRow } from './OrderSubRow/OrderSubRow';
+
 import { OrderTableRowDataType } from './Order';
 
 // FIXME: redesign ui from the scratch.
@@ -11,20 +13,12 @@ const Orders = () => {
   const { orderList } = useOrder();
   const { orderData } = useOrders(orderList);
   const columns = useMemo(() => ORDERS_COLUMNS, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const data = useMemo(() => orderData, []);
 
-  const renderRowSubComponent = useCallback(
-    ({ row }) => (
-      <pre
-        style={{
-          fontSize: '10px',
-        }}
-      >
-        <code>{JSON.stringify({ values: row.values }, null, 2)}</code>
-      </pre>
-    ),
-    []
-  );
+  const renderRowSubComponent = useCallback(({ row }) => {
+    return <OrderSubRow DropDownRowDatas={row.original} />;
+  }, []);
 
   return (
     <section id="orders">

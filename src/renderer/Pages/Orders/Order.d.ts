@@ -1,6 +1,6 @@
 export interface OrderTableRowDataType {
   id: string;
-  date: string;
+  date: string | Date;
   planType: string;
   planId: string;
   states: string;
@@ -8,7 +8,7 @@ export interface OrderTableRowDataType {
   amount: string;
   name: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  subRowData: {}[];
+  subRowData: SubRow;
   addOnTotal: number;
   discount: number;
   price: string;
@@ -17,13 +17,10 @@ export interface OrderTableRowDataType {
 
 // export interface SubRow {}
 
-export interface Row1 {
+export interface SubRow {
   client: string;
   phone: string;
   email: string;
-}
-
-export interface Row2 {
   orderId: string;
   addOns?: string[];
 }

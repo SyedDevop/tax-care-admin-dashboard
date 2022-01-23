@@ -7,6 +7,7 @@ import { Column } from 'react-table';
 
 import { OrderTableRowDataType } from './Order';
 import { OrderState, PaymentState } from '../../Enum';
+import { formatTimestamp } from '../../Utils';
 
 export const OrderStates: Record<string, OrderState> = {
   complete: OrderState.complete,
@@ -32,6 +33,7 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   {
     Header: 'date',
     accessor: 'date',
+    Cell: ({ value }) => formatTimestamp(new Date(value)),
   },
   {
     Header: 'name',
@@ -44,15 +46,15 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   {
     Header: 'states',
     accessor: 'states',
-    Cell: ({ cell }) => {
-      return <Span value={cell.value} />;
+    Cell: ({ value }) => {
+      return <Span value={value} />;
     },
   },
   {
     Header: 'payment',
     accessor: 'paymentState',
-    Cell: ({ cell }) => {
-      return <Span value={cell.value} />;
+    Cell: ({ value }) => {
+      return <Span value={value} />;
     },
   },
   {

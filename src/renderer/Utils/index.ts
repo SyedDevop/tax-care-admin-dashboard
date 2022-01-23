@@ -20,8 +20,8 @@ function isAll<T>(obj: Record<string, T>, v: T): boolean {
   return Object.values(obj).every((item) => item === v);
 }
 
-function formatTimestamp(time: Timestamp) {
-  return time.toDate().toUTCString().split(' ').slice(1, 4).join(' ');
+function formatTimestamp(time: Date) {
+  return time.toUTCString().split(' ').slice(1, 4).join(' ');
 }
 
 export const numberToCurrency = (number: number): string => {

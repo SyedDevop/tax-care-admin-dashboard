@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import { OrderTableRowDataType, UserOrderData } from '../../Types';
 // import { useOrder } from '../../Context';
-import { formatTimestamp, numberToCurrency } from '../../Utils';
+import { numberToCurrency } from '../../Utils';
 
 // TODO-3: after merging newUserOrder and ExistingUserOrder delete the orderData...
 // ... and create new orderData
@@ -10,7 +10,7 @@ const useOrders = (orderList: UserOrderData[]) => {
   const orderData = orderList.map((order): OrderTableRowDataType => {
     return {
       id: order.id,
-      date: formatTimestamp(order.issuedDate),
+      date: order.issuedDate.toDate().toISOString(),
       planType: order.orderDetails.planType,
       planId: order.orderDetails.planId,
       states: order.orderStates.state,
@@ -20,17 +20,15 @@ const useOrders = (orderList: UserOrderData[]) => {
       addOnTotal: order.totalAddOnAmount,
       discount: order.discountPrice,
       price: numberToCurrency(order.orderDetails.price),
-      subRowData: [
-        {
-          client: order.clientType,
-          phone: order.clientData.phoneNumber,
-          email: order.clientData.email,
-          orderId: order.orderId,
-          addOns: order.orderDetails.addOnRecord?.map(
-            (value) => `${value.addOnPlanId} (${value.addOnPrice})`
-          ),
-        },
-      ],
+      subRowData: {
+        client: order.clientType,
+        phone: order.clientData.phoneNumber,
+        email: order.clientData.email,
+        orderId: order.orderId,
+        addOns: order.orderDetails.addOnRecord?.map(
+          (value) => `${value.addOnPlanId} (${value.addOnPrice})`
+        ),
+      },
     };
   });
 

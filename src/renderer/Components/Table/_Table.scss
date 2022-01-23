@@ -96,13 +96,10 @@
   -webkit-box-shadow: 5px 5px 10px $clr-gray300 !important;
 }
 #drop-down__row {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 0;
-  opacity: 0;
+  background: $clr-gray150;
   transition: all 200ms linear;
+  box-shadow: 5px 5px 10px $clr-gray300 !important;
+  -webkit-box-shadow: 5px 5px 10px $clr-gray300 !important;
   h3,
   label {
     font-weight: 400;
@@ -163,11 +160,4 @@
       color: $light;
     }
   }
-}
-.drop-down__row--shown {
-  z-index: 1 !important;
-  opacity: 1 !important;
-  position: relative !important;
-  background: $clr-gray150;
-  transition: all 200ms linear !important;
 }

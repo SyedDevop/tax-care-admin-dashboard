@@ -39,7 +39,7 @@ export const OrderProvider: FC = ({ children }) => {
   const values = {
     orderList,
   };
-  console.log('from OrderContext: ', orderList);
+  console.trace('from OrderContext: ', orderList);
   return (
     <OrderContext.Provider value={values}>{children}</OrderContext.Provider>
   );
