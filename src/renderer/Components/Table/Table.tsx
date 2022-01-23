@@ -8,9 +8,14 @@ export interface TableProps<D extends object> {
   // data: OrderTableRowDataType[];
   columns: ReadonlyArray<Column<D>>;
   data: readonly D[];
+  renderRowSubComponent: ({ row }: any) => JSX.Element;
 }
 // eslint-disable-next-line @typescript-eslint/ban-types
-export function Table<T extends object = {}>({ columns, data }: TableProps<T>) {
+export function Table<T extends object = {}>({
+  columns,
+  data,
+  renderRowSubComponent,
+}: TableProps<T>) {
   const {
     getTableBodyProps,
     getTableProps,
@@ -18,23 +23,20 @@ export function Table<T extends object = {}>({ columns, data }: TableProps<T>) {
     rows,
     prepareRow,
     visibleColumns,
+    state: { expanded },
   } = useTable({ columns, data }, useSortBy, useExpanded);
 
-  const renderRowSubComponent = ({ row }: { row: any }) => (
-    <code>{JSON.stringify({ values: row.values }, null, 2)}</code>
-  );
-
   return (
-    <main id="table__section">
+    <>
+      <pre>
+        <code>{JSON.stringify({ expanded }, null, 2)}</code>
+      </pre>
       <table id="table__default-style" {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {}
-                </th>
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
               ))}
             </tr>
           ))}
@@ -52,18 +54,18 @@ export function Table<T extends object = {}>({ columns, data }: TableProps<T>) {
                   })}
                 </tr>
                 {/* Sub Row start here */}
-                {row.isExpanded && (
+                {row.isExpanded ? (
                   <tr>
                     <td colSpan={visibleColumns.length}>
                       {renderRowSubComponent({ row })}
                     </td>
                   </tr>
-                )}
+                ) : null}
               </React.Fragment>
             );
           })}
         </tbody>
       </table>
-    </main>
+    </>
   );
 }

@@ -8,7 +8,7 @@ export interface OrderTableRowDataType {
   amount: string;
   name: string;
   // eslint-disable-next-line @typescript-eslint/ban-types
-  subRows: {}[];
+  subRowData: {}[];
   addOnTotal: number;
   discount: number;
   price: string;

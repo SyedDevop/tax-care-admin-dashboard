@@ -1,5 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/prop-types */
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable react/jsx-props-no-spreading */
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Column } from 'react-table';
 import { OrderTableRowDataType } from './Order';
@@ -7,6 +8,21 @@ import { OrderTableRowDataType } from './Order';
 const Span = ({ value }: { value: string }) => <span>{value}</span>;
 
 const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
+  {
+    // Make an expander cell
+    Header: ({ getToggleAllRowsExpandedProps }) => (
+      <span {...getToggleAllRowsExpandedProps()}>
+        <MoreVertIcon />
+      </span>
+    ),
+    id: 'expander',
+    // @ts-ignore
+    Cell: ({ row }) => (
+      <span {...row.getToggleRowExpandedProps()}>
+        {row.isExpanded ? '👇' : '👉'}
+      </span>
+    ),
+  },
   {
     Header: 'date',
     accessor: 'date',
@@ -22,37 +38,20 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   {
     Header: 'states',
     accessor: 'states',
-    // eslint-disable-next-line react/prop-types
     Cell: ({ cell }) => {
-      // eslint-disable-next-line react/prop-types
       return <Span value={cell.value} />;
     },
   },
   {
     Header: 'payment',
     accessor: 'paymentState',
-    // eslint-disable-next-line react/prop-types
     Cell: ({ cell }) => {
-      // eslint-disable-next-line react/prop-types
       return <Span value={cell.value} />;
     },
   },
   {
     Header: 'amount',
     accessor: 'amount',
-  },
-
-  {
-    // Build our expander column
-    id: 'subRow', // Make sure it has an ID
-    // eslint-disable-next-line react/prop-types
-    accessor: 'moreIcon',
-    Header: <MoreVertIcon />,
-    Cell: ({ row }: { row: any }) => (
-      <span {...row.getToggleRowExpandedProps()}>
-        {row.isExpanded ? '👇' : '👉'}
-      </span>
-    ),
   },
 ];
 

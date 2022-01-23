@@ -1,10 +1,7 @@
-import { useMemo, StrictMode } from 'react';
-import { Column, useTable } from 'react-table';
+import { useMemo, StrictMode, useCallback } from 'react';
 
 import { Table } from '../../Components/Table';
-
 import { useOrder } from '../../Context';
-import OrdersList from './OrderList/OrdersList';
 import useOrders from './useOrders';
 import ORDERS_COLUMNS from './OrdersColumns';
 import { OrderTableRowDataType } from './Order';
@@ -15,13 +12,31 @@ const Orders = () => {
   const { orderData } = useOrders(orderList);
   const columns = useMemo(() => ORDERS_COLUMNS, []);
   const data = useMemo(() => orderData, []);
+
+  const renderRowSubComponent = useCallback(
+    ({ row }) => (
+      <pre
+        style={{
+          fontSize: '10px',
+        }}
+      >
+        <code>{JSON.stringify({ values: row.values }, null, 2)}</code>
+      </pre>
+    ),
+    []
+  );
+
   return (
     <section id="orders">
       <header>
         <h1>Orders &#x21F5;</h1>
       </header>
       <StrictMode>
-        <Table columns={columns} data={data} />
+        <Table
+          columns={columns}
+          data={data}
+          renderRowSubComponent={renderRowSubComponent}
+        />
       </StrictMode>
     </section>
   );

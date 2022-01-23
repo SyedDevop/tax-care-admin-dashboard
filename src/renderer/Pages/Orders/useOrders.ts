@@ -20,7 +20,7 @@ const useOrders = (orderList: UserOrderData[]) => {
       addOnTotal: order.totalAddOnAmount,
       discount: order.discountPrice,
       price: numberToCurrency(order.orderDetails.price),
-      subRows: [
+      subRowData: [
         {
           client: order.clientType,
           phone: order.clientData.phoneNumber,
