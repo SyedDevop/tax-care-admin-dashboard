@@ -1,93 +1,90 @@
-// #table__section {
-//   position: relative;
-//   width: 100%;
-//   max-height: 85vh;
-//   overflow-y: scroll;
-//   scrollbar-width: none;
-//   &::-webkit-scrollbar {
-//     display: none;
-//   }
-// }
-#table__default-style {
-  background-color: $light;
+.table-body {
+  position: relative;
   width: 100%;
-  border-collapse: collapse;
-  box-shadow: 5px 5px 10px $clr-gray300;
-  &,
-  tbody,
-  td,
-  tfoot,
-  th,
-  thead,
-  tr {
-    padding: 15px 8px;
-    text-align: left;
+  max-height: 84vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar {
+    display: none;
   }
-
-  thead {
-    background: $light;
-    color: $secondary;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  .table__default-style {
+    background-color: $light;
+    width: 100%;
+    border-collapse: collapse;
     box-shadow: 5px 5px 10px $clr-gray300;
-  }
-  tbody {
-    margin-top: 15px;
-    color: $black-dark;
-    transition: all 200ms linear;
+    &,
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
     tr {
-      position: relative;
-      border-bottom: 1px solid $gray-700;
-      transition: all 200ms ease-in;
+      padding: 10px 8px;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: $light;
+      color: $secondary;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 5px 5px 10px $clr-gray300;
+    }
+    tbody {
+      margin-top: 15px;
+      color: $black-dark;
+      transition: all 200ms linear;
+      tr {
+        position: relative;
+        border-bottom: 1px solid $gray-700;
+        transition: all 200ms ease-in;
+        .table__row--title {
+          position: absolute;
+          top: 100%;
+        }
+        .expanded-arrow {
+          color: $gray-400;
+          transform: rotate(0deg);
+          transition: all 400ms ease-in;
+        }
+        .expanded-arrow--clicked {
+          color: $primary;
+          transform: rotate(-180deg);
+          transition: all 400ms ease-in;
+        }
+
+        &:hover {
+          background-color: $clr-gray100;
+        }
+      }
       .table__row--title {
-        position: absolute;
-        top: 100%;
-      }
-      .sub-text {
-        font-size: 0.9rem;
-        color: $clr-gray500;
-      }
-
-      .expanded-arrow {
-        color: $gray-400;
-        transform: rotate(0deg);
-        transition: all 400ms ease-in;
-      }
-      .expanded-arrow--clicked {
-        color: $primary;
-        transform: rotate(-180deg);
-        transition: all 400ms ease-in;
-      }
-
-      &:hover {
-        background-color: $clr-gray100;
+        padding: 5px 10px;
+        border-radius: 1px;
       }
     }
-    .table__row--title {
+    @mixin identifierBlockStyle {
       padding: 5px 10px;
-      border-radius: 1px;
+      border-radius: 5px;
+      font-weight: 300;
     }
-  }
-  @mixin identifierBlockStyle {
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-weight: 300;
-  }
-  .complete {
-    @include identifierBlockStyle();
-    color: $green;
-    background-color: $green-light;
-  }
-  .pending {
-    @include identifierBlockStyle();
-    background-color: #fff0c2;
-    color: #a68b00;
-  }
-  .closed {
-    @include identifierBlockStyle();
-    background-color: $red-light;
-    color: $red;
+    .complete {
+      @include identifierBlockStyle();
+      color: $green;
+      background-color: $green-light;
+    }
+    .pending {
+      @include identifierBlockStyle();
+      background-color: #fff0c2;
+      color: #a68b00;
+    }
+    .closed {
+      @include identifierBlockStyle();
+      background-color: $red-light;
+      color: $red;
+    }
   }
 }
 
@@ -96,7 +93,7 @@
   -webkit-box-shadow: 5px 5px 10px $clr-gray300 !important;
 }
 #drop-down__row {
-  background: $clr-gray150;
+  // background: $clr-gray100;
   transition: all 200ms linear;
   box-shadow: 5px 5px 10px $clr-gray300 !important;
   -webkit-box-shadow: 5px 5px 10px $clr-gray300 !important;
@@ -104,7 +101,7 @@
   label {
     font-weight: 400;
     color: $clr-gray400;
-    font-size: 1rem;
+    font-size: 0.9rem;
     &.value {
       color: $clr-gray700;
       text-align: left;

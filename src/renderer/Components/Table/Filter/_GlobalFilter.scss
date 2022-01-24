@@ -1,0 +1,26 @@
+#table__global--filter {
+  --radius-curve: 10px;
+  width: 40%;
+  height: 35px;
+  display: flex;
+  border: 2px solid $clr-gray200;
+  background-color: $light;
+  border-radius: var(--radius-curve);
+  align-items: center;
+  * {
+    padding: 5px;
+    color: $clr-gray400;
+    border: 0;
+    background-color: $light;
+    border-radius: var(--radius-curve);
+  }
+  input {
+    height: 100%;
+    width: 100%;
+    font-size: 1rem;
+    outline: none;
+  }
+  svg {
+    font-size: 1.8rem;
+  }
+}

@@ -1,0 +1,35 @@
+.page--select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: $clr-gray100;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px 10px 0 0;
+  color: $black-light;
+  * {
+    display: flex;
+    gap: 0.8rem;
+  }
+  input {
+    width: 40px;
+  }
+  .page--select__btn {
+    gap: 0.5rem;
+    button {
+      background: $light;
+      border: 0;
+      border-radius: 5px;
+      padding: 3px;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      svg {
+        font-size: 1rem;
+        color: $primary;
+      }
+    }
+  }
+}

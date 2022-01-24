@@ -23,14 +23,16 @@ const Orders = () => {
   return (
     <section id="orders">
       <header>
-        <h1>Orders &#x21F5;</h1>
+        <h1>Orders</h1>
       </header>
       <StrictMode>
-        <Table
-          columns={columns}
-          data={data}
-          renderRowSubComponent={renderRowSubComponent}
-        />
+        <main className="orders__table">
+          <Table
+            columns={columns}
+            data={data}
+            renderRowSubComponent={renderRowSubComponent}
+          />
+        </main>
       </StrictMode>
     </section>
   );
