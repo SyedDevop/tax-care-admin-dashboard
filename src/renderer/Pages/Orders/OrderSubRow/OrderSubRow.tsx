@@ -93,27 +93,27 @@ const DropDownRowContent = ({ rowDatas }: DropDownRowContentProps) => {
 
 // eslint-disable-next-line import/prefer-default-export
 export const OrderSubRow = ({ DropDownRowDatas }: DropDownRowProps) => {
-  const [isAnyCheckChecked, setIsAnyCheckChecked] = useState(true);
-  const [checkState, setCheckState] = useState({
-    state: false,
-    payment: false,
-  });
-  const handelStateCheck = (e: ChangeEvent<HTMLInputElement>) => {
-    setCheckState((pre) => {
-      return { ...pre, [e.target.value]: e.target.checked };
-    });
-  };
-  useEffect(() => {
-    const handleSaveButtonBehaver = () => {
-      if (isAny(checkState, true)) {
-        setIsAnyCheckChecked(false);
-      } else {
-        setIsAnyCheckChecked(true);
-      }
-    };
+  // const [isAnyCheckChecked, setIsAnyCheckChecked] = useState(true);
+  // const [checkState, setCheckState] = useState({
+  //   state: false,
+  //   payment: false,
+  // });
+  // const handelStateCheck = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setCheckState((pre) => {
+  //     return { ...pre, [e.target.value]: e.target.checked };
+  //   });
+  // };
+  // useEffect(() => {
+  //   const handleSaveButtonBehaver = () => {
+  //     if (isAny(checkState, true)) {
+  //       setIsAnyCheckChecked(false);
+  //     } else {
+  //       setIsAnyCheckChecked(true);
+  //     }
+  //   };
 
-    handleSaveButtonBehaver();
-  }, [checkState]);
+  //   handleSaveButtonBehaver();
+  // }, [checkState]);
   return (
     <>
       <div className="drop-down__content">
@@ -124,7 +124,7 @@ export const OrderSubRow = ({ DropDownRowDatas }: DropDownRowProps) => {
             text={numberToCurrency(DropDownRowDatas.discount)}
           />
           <TextRowItem title="pack price" text={DropDownRowDatas.price} />
-          <CheckInputRowItem
+          {/* <CheckInputRowItem
             {...{
               title: `states`,
               handelCheck: handelStateCheck,
@@ -137,10 +137,10 @@ export const OrderSubRow = ({ DropDownRowDatas }: DropDownRowProps) => {
               handelCheck: handelStateCheck,
               inputId: `payment-${DropDownRowDatas.id}`,
             }}
-          />
+          /> */}
         </div>
       </div>
-      <div className="conformation--section">
+      {/* <div className="conformation--section">
         <button
           type="button"
           disabled={isAnyCheckChecked}
@@ -153,7 +153,7 @@ export const OrderSubRow = ({ DropDownRowDatas }: DropDownRowProps) => {
           <HighlightOffIcon />
           cancel
         </button>
-      </div>
+      </div> */}
     </>
   );
 };

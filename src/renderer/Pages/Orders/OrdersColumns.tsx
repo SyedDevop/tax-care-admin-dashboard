@@ -29,6 +29,10 @@ const Span = ({ value }: { value: string }) => (
   <span className={isClassName(value)}>{value}</span>
 );
 
+const ActionButton = ({ value }: { value: string }) => (
+  <button type="button">action</button>
+);
+
 const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   {
     Header: 'date',
@@ -51,15 +55,15 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
     },
   },
   {
-    Header: 'payment',
-    accessor: 'paymentState',
-    Cell: ({ value }) => {
-      return <Span value={value} />;
-    },
-  },
-  {
     Header: 'amount',
     accessor: 'amount',
+  },
+  {
+    Header: 'action',
+    accessor: 'id',
+    Cell: ({ value }) => {
+      return <ActionButton value={value} />;
+    },
   },
   {
     // Make an expander cell

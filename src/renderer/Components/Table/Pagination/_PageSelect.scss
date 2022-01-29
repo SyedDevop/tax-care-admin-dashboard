@@ -1,0 +1,55 @@
+.page--select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 0 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: $clr-gray100;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px 10px 0 0;
+  color: $black-light;
+  * {
+    font-size: 0.8rem;
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+  hr,
+  input {
+    border: 1px solid $black-gray;
+    border-radius: 2px;
+  }
+  hr {
+    height: 1rem;
+  }
+  input {
+    width: 40px;
+    outline: none;
+    color: $black-light;
+  }
+  .page--select__btn {
+    gap: 0.5rem;
+    button {
+      background: $light;
+      border: 0;
+      padding: 3px;
+      border: 1px solid $black-gray;
+      border-radius: 5px;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      transition: all 200ms ease-in;
+      &:disabled {
+        cursor: not-allowed;
+        box-shadow: none;
+        opacity: 0.5;
+        transition: all 200ms ease-in;
+      }
+      svg {
+        font-size: 1rem;
+        color: $primary !important;
+      }
+    }
+  }
+}

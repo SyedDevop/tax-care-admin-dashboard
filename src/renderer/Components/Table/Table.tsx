@@ -7,11 +7,13 @@ import {
   useSortBy,
   useExpanded,
   useGlobalFilter,
+  usePagination,
 } from 'react-table';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import { GlobalFilter } from './Filter/GlobalFilter';
+import Pagination from './Pagination/Pagination';
 
 export interface TableProps<D extends object> {
   classNameForRow?: string;
@@ -26,15 +28,27 @@ export function Table<T extends object = {}>({
   renderRowSubComponent,
 }: TableProps<T>) {
   const {
+    canNextPage,
+    canPreviousPage,
     getTableBodyProps,
     getTableProps,
+    gotoPage,
     headerGroups,
-    rows,
+    nextPage,
+    page,
+    pageOptions,
     prepareRow,
-    visibleColumns,
-    state: { globalFilter },
+    previousPage,
     setGlobalFilter,
-  } = useTable({ columns, data }, useGlobalFilter, useSortBy, useExpanded);
+    state: { globalFilter, pageIndex, pageSize },
+    visibleColumns,
+  } = useTable(
+    { columns, data },
+    useGlobalFilter,
+    useSortBy,
+    useExpanded,
+    usePagination
+  );
 
   return (
     <>
@@ -60,7 +74,7 @@ export function Table<T extends object = {}>({
             ))}
           </thead>
           <tbody {...getTableBodyProps()} style={{ maxHeight: '100px' }}>
-            {rows.map((row) => {
+            {page.map((row) => {
               prepareRow(row);
               return (
                 <React.Fragment key={row.getRowProps().key}>
@@ -89,24 +103,19 @@ export function Table<T extends object = {}>({
           </tbody>
         </table>
       </main>
-      <div className="page--select">
-        <div>1-5 of 30</div>
-        <div>
-          <div>
-            <p>the page you&rsquo;re on</p>
-            <input type="number" name="page-number" defaultValue={1} />
-          </div>
-          <hr />
-          <div className="page--select__btn">
-            <button type="button" className="page--select__pre">
-              <ArrowBackIcon />
-            </button>
-            <button type="button" className="page--select__next">
-              <ArrowForwardIcon />
-            </button>
-          </div>
-        </div>
-      </div>
+      <Pagination
+        {...{
+          canNextPage,
+          canPreviousPage,
+          gotoPage,
+          nextPage,
+          pageIndex,
+          pageOptions,
+          pageSize,
+          previousPage,
+        }}
+        totalRows={data.length}
+      />
     </>
   );
 }

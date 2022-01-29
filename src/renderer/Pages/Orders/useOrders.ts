@@ -11,7 +11,7 @@ const useOrders = (orderList: UserOrderData[]) => {
     return {
       id: order.id,
       date: order.issuedDate.toDate().toISOString(),
-      planType: order.orderDetails.planType,
+      planType: `${order.orderDetails.planType} (${order.orderDetails.planId})`,
       planId: order.orderDetails.planId,
       states: order.orderStates.state,
       paymentState: order.orderStates.payment,

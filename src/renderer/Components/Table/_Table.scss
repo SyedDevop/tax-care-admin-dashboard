@@ -1,7 +1,7 @@
 .table-body {
   position: relative;
   width: 100%;
-  max-height: 84vh;
+  max-height: 83vh;
   overflow-y: scroll;
   scrollbar-width: none;
   scroll-behavior: smooth;
@@ -20,11 +20,10 @@
     th,
     thead,
     tr {
-      padding: 10px 8px;
+      padding: 0.6em 8px;
       text-align: left;
       font-size: 0.9rem;
     }
-
     thead {
       background: $light;
       color: $secondary;
@@ -63,6 +62,20 @@
       .table__row--title {
         padding: 5px 10px;
         border-radius: 1px;
+      }
+    }
+    button {
+      padding: 5px 20px;
+      border: 2px solid transparent;
+      border-radius: 5px;
+      background-color: $secondary;
+      color: $light;
+      transition: all 200ms ease-in;
+      &:hover {
+        cursor: pointer;
+        border-color: $primary;
+        box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
+        transition: all 200ms ease-out;
       }
     }
     @mixin identifierBlockStyle {
