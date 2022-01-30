@@ -1,10 +1,19 @@
-import { useState, useEffect, useContext, createContext, FC } from 'react';
+import {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  FC,
+  useRef,
+  MutableRefObject,
+} from 'react';
 
 import { useDb } from '../Hooks';
 import { UserOrderData } from '../Types';
 
 interface OrderContextValue {
   orderList: UserOrderData[];
+  refresh: MutableRefObject<boolean>;
 }
 
 const OrderContext = createContext<OrderContextValue>({} as OrderContextValue);
@@ -14,22 +23,26 @@ export const useOrder = () => useContext(OrderContext);
 export const OrderProvider: FC = ({ children }) => {
   const { onSnapshot, getQueryReference } = useDb();
   const [orderList, setOrderList] = useState<Array<UserOrderData>>([]);
-
+  const refresh = useRef(false);
   useEffect(() => {
+    const q = getQueryReference('orders');
     const unsubscribe = onSnapshot(
-      getQueryReference('orders'),
+      q,
       (querySnapshot) => {
+        // setOrderList([]);
         querySnapshot.forEach((change) => {
           setOrderList((pre) => [
             ...pre,
             { ...change.data(), id: change.id } as UserOrderData,
           ]);
         });
+        refresh.current = !refresh.current;
       },
       (err) => {
-        console.log(err);
+        console.error(err);
       }
     );
+    console.trace('from orderContext useEffect ');
     return () => {
       unsubscribe();
     };
@@ -38,9 +51,11 @@ export const OrderProvider: FC = ({ children }) => {
 
   const values = {
     orderList,
+    refresh,
   };
   console.trace('from OrderContext: ', orderList);
   return (
     <OrderContext.Provider value={values}>{children}</OrderContext.Provider>
   );
 };
+// TODO: I have changed setOrderList to emitylist.

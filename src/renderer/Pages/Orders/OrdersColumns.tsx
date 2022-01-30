@@ -3,11 +3,15 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Column } from 'react-table';
+import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import { Column, Row } from 'react-table';
 
 import { OrderTableRowDataType } from './Order';
 import { OrderState, PaymentState } from '../../Enum';
 import { formatTimestamp } from '../../Utils';
+import { useDb } from '../../Hooks';
+import { useOrder } from '../../Context';
 
 export const OrderStates: Record<string, OrderState> = {
   complete: OrderState.complete,
@@ -29,9 +33,44 @@ const Span = ({ value }: { value: string }) => (
   <span className={isClassName(value)}>{value}</span>
 );
 
-const ActionButton = ({ value }: { value: string }) => (
-  <button type="button">action</button>
-);
+const ConformButton = ({ data }: { data: Row<OrderTableRowDataType> }) => {
+  const { putDoc } = useDb();
+  const { id, states } = data.original;
+  // const { refresh } = useOrder();
+  return (
+    <button
+      type="button"
+      id="order__btn--save"
+      disabled={states !== 'conformation'}
+      onClick={() => {
+        putDoc({ 'orderStates.state': 'complete' }, id);
+        // refresh.current = !refresh.current;
+      }}
+    >
+      <DataSaverOnIcon />
+      confirm
+    </button>
+  );
+};
+const CancelButton = ({ data }: { data: Row<OrderTableRowDataType> }) => {
+  const { putDoc } = useDb();
+  const { id, states } = data.original;
+  // const { refresh } = useOrder();
+  return (
+    <button
+      type="button"
+      id="order__btn--cancel"
+      disabled={states === 'cancelled'}
+      onClick={() => {
+        putDoc({ 'orderStates.state': 'cancelled' }, id);
+        // refresh.current = !refresh.current;
+      }}
+    >
+      <HighlightOffIcon />
+      cancel
+    </button>
+  );
+};
 
 const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   {
@@ -49,6 +88,7 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
   },
   {
     Header: 'states',
+    id: 'states-indication',
     accessor: 'states',
     Cell: ({ value }) => {
       return <Span value={value} />;
@@ -59,11 +99,15 @@ const ORDERS_COLUMNS: Column<OrderTableRowDataType>[] = [
     accessor: 'amount',
   },
   {
-    Header: 'action',
+    Header: 'conform',
+    accessor: 'states',
+    id: 'states-conformation',
+    Cell: ({ row }) => <ConformButton data={row} />,
+  },
+  {
+    Header: 'cancel',
     accessor: 'id',
-    Cell: ({ value }) => {
-      return <ActionButton value={value} />;
-    },
+    Cell: ({ row }) => <CancelButton data={row} />,
   },
   {
     // Make an expander cell

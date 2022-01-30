@@ -9,6 +9,8 @@ import {
   orderBy,
   connectFirestoreEmulator,
   onSnapshot,
+  updateDoc,
+  doc,
 } from 'firebase/firestore';
 
 import { UserOrderData } from '../Types';
@@ -60,6 +62,10 @@ const useDb = () => {
     return query(collection(db, collationName), orderBy('issuedDate', 'desc'));
   };
 
+  const putDoc = <T>(data: Record<string, T>, id: string) => {
+    return updateDoc(doc(db, 'orders', id), data);
+  };
+
   return {
     orderById,
     addExistingUserOrder,
@@ -68,6 +74,7 @@ const useDb = () => {
     getALlDoc,
     getQueryReference,
     onSnapshot,
+    putDoc,
   };
 };
 

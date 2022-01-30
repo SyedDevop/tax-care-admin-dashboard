@@ -65,18 +65,35 @@
       }
     }
     button {
-      padding: 5px 20px;
-      border: 2px solid transparent;
-      border-radius: 5px;
-      background-color: $secondary;
-      color: $light;
-      transition: all 200ms ease-in;
-      &:hover {
-        cursor: pointer;
-        border-color: $primary;
-        box-shadow: rgba(100, 100, 111, 0.5) 0px 7px 29px 0px;
-        transition: all 200ms ease-out;
+      * {
+        font-size: 1rem;
       }
+      display: flex;
+      gap: 0.5rem;
+      padding: 5px 10px;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      transition: all 200ms ease-in;
+      &:not(:disabled):hover {
+        cursor: pointer;
+        color: $light;
+        opacity: 0.9;
+        border: 1px solid $secondary;
+        transition: all 200ms ease-in;
+      }
+      &:disabled,
+      &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+    #order__btn--save {
+      background-color: #15de6a;
+      color: $secondary;
+    }
+    #order__btn--cancel {
+      background-color: $red;
+      color: $light;
     }
     @mixin identifierBlockStyle {
       padding: 5px 10px;
@@ -134,40 +151,6 @@
         justify-content: space-between;
         gap: 3rem;
       }
-    }
-  }
-  .conformation--section {
-    display: flex;
-    justify-content: center;
-    gap: 5rem;
-    button {
-      display: flex;
-      gap: 0.9rem;
-      padding: 5px 20px;
-      font-size: 1.2rem;
-      border: 1px solid transparent;
-      border-radius: 15px;
-      transition: all 200ms ease-in;
-      &:not(:disabled):hover {
-        cursor: pointer;
-        color: $light;
-        opacity: 0.9;
-        border: 1px solid $secondary;
-        transition: all 200ms ease-in;
-      }
-      &:disabled,
-      &[disabled] {
-        cursor: not-allowed;
-        opacity: 0.5;
-      }
-    }
-    #order__btn--save {
-      background-color: #15de6a;
-      color: $secondary;
-    }
-    #order__btn--cancel {
-      background-color: $red;
-      color: $light;
     }
   }
 }

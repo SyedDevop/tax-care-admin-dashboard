@@ -6,7 +6,7 @@ import { numberToCurrency } from '../../Utils';
 // TODO-3: after merging newUserOrder and ExistingUserOrder delete the orderData...
 // ... and create new orderData
 
-const useOrders = (orderList: UserOrderData[]) => {
+const formatToOrderData = (orderList: UserOrderData[]) => {
   const orderData = orderList.map((order): OrderTableRowDataType => {
     return {
       id: order.id,
@@ -35,4 +35,4 @@ const useOrders = (orderList: UserOrderData[]) => {
   return { orderData };
 };
 
-export default useOrders;
+export default formatToOrderData;
