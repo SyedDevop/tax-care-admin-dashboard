@@ -11,36 +11,46 @@
     position: absolute;
   }
   .notification__section {
-    width: 350px;
-    height: 100vh;
+    &::before {
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2em;
+      position: absolute;
+      background-image: linear-gradient($gray-700, transparent);
+    }
+    background-color: $light;
+    margin-top: 0.5rem;
+    display: grid;
+    gap: 1em;
+    width: 200px;
+    height: 99vh;
     overflow-y: scroll;
     scroll-behavior: smooth;
     &::-webkit-scrollbar {
       display: none;
     }
     scrollbar-width: none;
-    display: grid;
-    place-items: center;
-    gap: 1em;
-    padding: 25px 20px;
     .notification__card {
-      display: grid;
-      gap: 0.25em;
-      border: 1px solid $gray-400;
-      border-radius: 20px;
-      padding: 25px;
+      color: $secondary;
+      padding: 5px 10px;
+      transition: all 200ms ease-in;
+      cursor: pointer;
       h1,
       h3 {
         font-weight: $font-weight-regular;
-        color: $black-light;
-      }
-      h3 {
         font-size: 0.9rem;
       }
-      h1 {
-        color: $secondary;
+      h3 {
+        color: $black-light;
+        font-size: 0.8rem;
       }
-      @include notification-button-style();
+      &:hover {
+        background-color: $clr-gray200;
+        box-shadow: 5px 5px 10px $clr-gray300;
+        transition: all 200ms ease-in;
+      }
     }
   }
 }

@@ -8,11 +8,10 @@ import {
   useExpanded,
   useGlobalFilter,
   usePagination,
+  
 } from 'react-table';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-import { GlobalFilter } from './Filter/GlobalFilter';
+import GlobalFilter from './Filter/GlobalFilter';
 import Pagination from './Pagination/Pagination';
 
 export interface TableProps<D extends object> {

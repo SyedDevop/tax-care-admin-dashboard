@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useAsyncDebounce } from 'react-table';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -30,5 +30,4 @@ const GlobalFilter = ({
   );
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { GlobalFilter };
+export default React.memo(GlobalFilter);

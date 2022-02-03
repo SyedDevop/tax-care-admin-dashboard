@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer } = require('electron');
+const { contextBridge, ipcRenderer, Notification } = require('electron');
 // const {} = require('')
 
 contextBridge.exposeInMainWorld('electron', {
@@ -21,5 +21,12 @@ contextBridge.exposeInMainWorld('electron', {
       }
     },
   },
-  loaclEnv: { name: 'hello' },
+  windowNotification: {
+    notify() {
+      new Notification({
+        title: 'NOTIFICATION_TITLE',
+        body: 'NOTIFICATION_BODY',
+      }).show();
+    },
+  },
 });

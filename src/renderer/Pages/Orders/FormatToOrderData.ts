@@ -32,7 +32,7 @@ const formatToOrderData = (orderList: UserOrderData[]) => {
     };
   });
 
-  return { orderData };
+  return orderData;
 };
 
 export default formatToOrderData;

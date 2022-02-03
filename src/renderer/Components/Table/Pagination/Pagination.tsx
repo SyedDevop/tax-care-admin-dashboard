@@ -1,7 +1,7 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
-type Props = {
+export interface PaginationProps {
   totalRows: number;
   pageSize: number;
   pageIndex: number;
@@ -11,7 +11,7 @@ type Props = {
   canPreviousPage: boolean;
   nextPage: () => void;
   canNextPage: boolean;
-};
+}
 
 const Pagination = ({
   canNextPage,
@@ -23,7 +23,7 @@ const Pagination = ({
   pageSize,
   previousPage,
   totalRows,
-}: Props) => {
+}: PaginationProps) => {
   return (
     <div className="page--select">
       <div>

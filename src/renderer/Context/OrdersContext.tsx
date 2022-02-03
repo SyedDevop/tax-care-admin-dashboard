@@ -29,7 +29,7 @@ export const OrderProvider: FC = ({ children }) => {
     const unsubscribe = onSnapshot(
       q,
       (querySnapshot) => {
-        // setOrderList([]);
+        setOrderList([]);
         querySnapshot.forEach((change) => {
           setOrderList((pre) => [
             ...pre,
@@ -42,7 +42,6 @@ export const OrderProvider: FC = ({ children }) => {
         console.error(err);
       }
     );
-    console.trace('from orderContext useEffect ');
     return () => {
       unsubscribe();
     };
@@ -53,7 +52,6 @@ export const OrderProvider: FC = ({ children }) => {
     orderList,
     refresh,
   };
-  console.trace('from OrderContext: ', orderList);
   return (
     <OrderContext.Provider value={values}>{children}</OrderContext.Provider>
   );

@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
 import { Timestamp } from 'firebase/firestore';
 
 /**
@@ -28,5 +30,14 @@ export const numberToCurrency = (number: number): string => {
   return `Rs ${number.toLocaleString('en-IN', { maximumFractionDigits: 2 })}/-`;
 };
 
+function isObjectEmpty<T>(object: Record<string, T>): boolean {
+  for (const property in object) {
+    // if any enumerable property is found object is not empty
+    return false;
+  }
+
+  return true;
+}
+
 // eslint-disable-next-line import/prefer-default-export
-export { isAny, isAll, formatTimestamp };
+export { isAny, isAll, formatTimestamp, isObjectEmpty };
