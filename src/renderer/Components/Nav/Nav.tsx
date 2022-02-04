@@ -30,7 +30,7 @@ const Nav: FC = () => {
           <NavLink activeClassName="active" to="/query" title="Query">
             <ImportContactsIcon />
           </NavLink>
-          <NavLink activeClassName="active" to="/orders/order" title="Orders">
+          <NavLink activeClassName="active" to="/orders" title="Orders">
             <ShoppingBasketIcon />
           </NavLink>
         </div>

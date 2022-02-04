@@ -11,8 +11,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import dotenv from 'dotenv';
+import { app, BrowserWindow, shell, ipcMain, nativeTheme } from 'electron';
 import { resolveHtmlPath } from './util';
 
 let mainWindow: BrowserWindow | null = null;
@@ -92,9 +91,28 @@ const createWindow = async () => {
   });
 };
 
+if (process.platform === 'win32') {
+  app.setAppUserModelId('Taxcare Accounting Solutions');
+}
+
+nativeTheme.themeSource = 'system';
+// eslint-disable-next-line no-new
+// new Notification();
+
+// mainWindow.moveTop();
+// mainWindow.focus();
+
 /**
  * Add event listeners...
  */
+
+ipcMain.on('window-maximize', () => {
+  if (!mainWindow) {
+    throw new Error('"mainWindow" is not defined');
+  }
+  mainWindow.moveTop();
+  mainWindow.focus();
+});
 
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even

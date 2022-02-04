@@ -44,7 +44,6 @@ const Login = () => {
         type: 'manual',
         message: error.message,
       });
-      console.error(error);
     } finally {
       setLoader(false);
     }

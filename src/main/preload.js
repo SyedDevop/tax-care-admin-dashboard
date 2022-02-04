@@ -20,13 +20,8 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.once(channel, (event, ...args) => func(...args));
       }
     },
-  },
-  windowNotification: {
-    notify() {
-      new Notification({
-        title: 'NOTIFICATION_TITLE',
-        body: 'NOTIFICATION_BODY',
-      }).show();
+    windowMaximize() {
+      ipcRenderer.send('window-maximize');
     },
   },
 });

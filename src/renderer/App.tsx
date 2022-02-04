@@ -5,6 +5,17 @@ import Login from './Pages/Login/Login';
 import './core-ui/index.scss';
 import Home from './Pages/Home/Home';
 
+declare global {
+  interface Window {
+    electron: {
+      ipcRenderer: {
+        windowMaximize(): void;
+        // any other methods you've defined...
+      };
+    };
+  }
+}
+
 export default function App() {
   return (
     <div className="app">
