@@ -11,6 +11,7 @@ import {
   onSnapshot,
   updateDoc,
   doc,
+  deleteDoc,
 } from 'firebase/firestore';
 
 import { UserOrderData } from '../Types';
@@ -66,6 +67,10 @@ const useDb = () => {
     return updateDoc(doc(db, 'orders', id), data);
   };
 
+  const deleteDocument = (id: string, collationName: string) => {
+    return deleteDoc(doc(db, collationName, id));
+  };
+
   return {
     orderById,
     addExistingUserOrder,
@@ -75,6 +80,7 @@ const useDb = () => {
     getQueryReference,
     onSnapshot,
     putDoc,
+    deleteDocument,
   };
 };
 

@@ -1,85 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
 
-import { Timestamp } from 'firebase/firestore';
-import icon from '../../../../assets/resource/tc-logo.png';
-import { useDb } from '../../Hooks';
-import { formatTimestamp } from '../../Utils';
-
-// import { NotificationCard } from './NotificationCard';
-
-interface NotifyDta {
-  client: string;
-  name: string;
-  orderId: string;
-  title: string;
-  issuedDate: Timestamp;
-}
+import { useNotification } from './useNotification';
 
 const NotificationBar: React.FC = () => {
-  const { onSnapshot, getQueryReference } = useDb();
-  const [notificationData, setNotificationData] = useState<NotifyDta[]>([]);
-  const { pathname } = useLocation();
-  const { push } = useHistory();
-
-  useEffect(() => {
-    const q = getQueryReference('notification');
-    const unsubscribe = onSnapshot(
-      q,
-      (querySnapshot) => {
-        setNotificationData([]);
-        querySnapshot.forEach((change) => {
-          setNotificationData((pre) => [
-            ...pre,
-            { ...change.data() } as NotifyDta,
-          ]);
-        });
-      },
-      (err) => {
-        console.error(err);
-      }
-    );
-    return () => {
-      unsubscribe();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (notificationData.length > 0) {
-      const { title, name, client, orderId, issuedDate } =
-        notificationData.reverse()[0];
-      const notify = new Notification(title, {
-        body: `client: ${client} \nname: ${name} \ndate: ${formatTimestamp(
-          new Date(issuedDate.toDate())
-        )} ${issuedDate.toDate().toLocaleTimeString()}`,
-        icon,
-      });
-      if (notify !== null) {
-        notify.addEventListener('click', () => {
-          window.electron.ipcRenderer.windowMaximize();
-          if (pathname !== '/orders') {
-            push('/orders');
-          }
-        });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [notificationData[0]]);
-
+  const { handelNotificationClick, notificationData } = useNotification();
   return (
     <section id="notification">
       <div className="notification__section">
-        {/* <NotificationCard /> */}
-        {notificationData.map(({ client, name, title, orderId }) => {
+        {notificationData.map(({ client, name, title, orderId, id }) => {
           return (
             <div
               key={orderId}
               className="notification__card"
               onClick={() => {
-                if (pathname !== '/orders') {
-                  push('/orders');
-                }
+                // handelNotificationClick(id);
               }}
               onKeyPress={() => {}}
               role="button"

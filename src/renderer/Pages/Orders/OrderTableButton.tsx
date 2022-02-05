@@ -28,7 +28,11 @@ const OrderTableButton = ({
   Icon,
 }: OrderTableButtonProp) => {
   const { putDoc } = useDb();
-  const { id, states } = data.original;
+  const {
+    id,
+    states,
+    subRowData: { client: clientType },
+  } = data.original;
   const [loadState, setLoadState] = useState(false);
   let disable = false;
   switch (btnDisableCheck.checkType) {

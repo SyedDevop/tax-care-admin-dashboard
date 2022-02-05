@@ -23,6 +23,7 @@
     background-color: $light;
     margin-top: 0.5rem;
     display: grid;
+    grid-auto-rows: max-content;
     gap: 1em;
     width: 200px;
     height: 99vh;
