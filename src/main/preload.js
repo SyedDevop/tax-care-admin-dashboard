@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer, Notification } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 // const {} = require('')
 
 contextBridge.exposeInMainWorld('electron', {

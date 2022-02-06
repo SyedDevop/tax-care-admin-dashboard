@@ -96,11 +96,6 @@ if (process.platform === 'win32') {
 }
 
 nativeTheme.themeSource = 'system';
-// eslint-disable-next-line no-new
-// new Notification();
-
-// mainWindow.moveTop();
-// mainWindow.focus();
 
 /**
  * Add event listeners...

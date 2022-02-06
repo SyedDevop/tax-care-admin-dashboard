@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { SvgIconTypeMap } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { Row } from 'react-table';
+
 import { OrderTableRowDataType } from './Order';
 import { useDb } from '../../Hooks';
+import { uuidGenerator } from '../../Utils';
 
 export interface OrderTableButtonProp {
   data: Row<OrderTableRowDataType>;
@@ -27,11 +29,12 @@ const OrderTableButton = ({
   btnDisableCheck,
   Icon,
 }: OrderTableButtonProp) => {
-  const { putDoc } = useDb();
+  const { putDoc, postDoc } = useDb();
   const {
     id,
     states,
-    subRowData: { client: clientType },
+    subRowData: { client: clientType, email, orderId },
+    name,
   } = data.original;
   const [loadState, setLoadState] = useState(false);
   let disable = false;
@@ -45,6 +48,13 @@ const OrderTableButton = ({
     default:
       break;
   }
+  const addTempClient = async () => {
+    await postDoc('tempClientData', {
+      apiKey: `${orderId}-${id}-${uuidGenerator()}`,
+      email,
+      name,
+    });
+  };
   return (
     <button
       type="button"
@@ -53,6 +63,9 @@ const OrderTableButton = ({
       onClick={async () => {
         try {
           setLoadState((pre) => !pre);
+          if (btnName === 'confirm' && clientType === 'new') {
+            await addTempClient();
+          }
           await putDoc({ 'orderStates.state': dbFiled }, id);
         } finally {
           setLoadState((pre) => !pre);

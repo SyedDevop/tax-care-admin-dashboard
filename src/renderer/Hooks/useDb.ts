@@ -67,6 +67,10 @@ const useDb = () => {
     return updateDoc(doc(db, 'orders', id), data);
   };
 
+  const postDoc = <T>(collationName: string, data: Record<string, T>) => {
+    return addDoc(collection(db, collationName), data);
+  };
+
   const deleteDocument = (id: string, collationName: string) => {
     return deleteDoc(doc(db, collationName, id));
   };
@@ -81,6 +85,7 @@ const useDb = () => {
     onSnapshot,
     putDoc,
     deleteDocument,
+    postDoc,
   };
 };
 

@@ -173,6 +173,7 @@
     "@types/react-table": "^7.7.9",
     "@types/react-test-renderer": "^17.0.1",
     "@types/terser-webpack-plugin": "^5.0.4",
+    "@types/uuid": "^8.3.4",
     "@types/webpack-dev-server": "^4.5.0",
     "@types/webpack-env": "^1.16.3",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
@@ -249,6 +250,7 @@
     "react-router-dom": "^5.3.0",
     "react-table": "^7.7.0",
     "regenerator-runtime": "^0.13.9",
+    "uuid": "^3.4.0",
     "yup": "^0.32.11"
   },
   "devEngines": {

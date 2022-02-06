@@ -1,6 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
-import { Timestamp } from 'firebase/firestore';
+import { v4 as uuid } from 'uuid';
+
+function uuidGenerator(): string {
+  return uuid().substring(0, 10).toUpperCase().replace('-', '');
+}
 
 /**
  * This function takes an object and check if any of the passed value matches in the Object.
@@ -40,4 +44,4 @@ function isObjectEmpty<T>(object: Record<string, T>): boolean {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export { isAny, isAll, formatTimestamp, isObjectEmpty };
+export { isAny, isAll, formatTimestamp, isObjectEmpty, uuidGenerator };
