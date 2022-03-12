@@ -5,7 +5,6 @@ import { Row } from 'react-table';
 
 import { OrderTableRowDataType } from './Order';
 import { useDb } from '../../Hooks';
-import { uuidGenerator } from '../../Utils';
 
 export interface OrderTableButtonProp {
   data: Row<OrderTableRowDataType>;
@@ -50,27 +49,28 @@ const OrderTableButton = ({
   }
   const addTempClient = async () => {
     await postDoc('tempClientData', {
-      apiKey: `${orderId}-${id}-${uuidGenerator()}`,
+      apiKey: `${orderId}-${id}-id`,
       email,
       name,
     });
+  };
+  const handleConfirmationOrCancel = async () => {
+    try {
+      setLoadState((pre) => !pre);
+      if (btnName === 'confirm' && clientType === 'new') {
+        await addTempClient();
+      }
+      await putDoc({ 'orderStates.state': dbFiled }, id);
+    } finally {
+      setLoadState((pre) => !pre);
+    }
   };
   return (
     <button
       type="button"
       id={`order__btn--${btnId}`}
       disabled={disable}
-      onClick={async () => {
-        try {
-          setLoadState((pre) => !pre);
-          if (btnName === 'confirm' && clientType === 'new') {
-            await addTempClient();
-          }
-          await putDoc({ 'orderStates.state': dbFiled }, id);
-        } finally {
-          setLoadState((pre) => !pre);
-        }
-      }}
+      onClick={handleConfirmationOrCancel}
     >
       <Icon />
       {!loadState ? btnName : 'load.....'}
